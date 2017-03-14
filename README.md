@@ -27,5 +27,8 @@ The final project of the Neighborhood Project, part of the Udacity Front-end Web
 ## Responsive:
 - the app is responsive though not fully optimized for the smallest screens (e.g. iphone 5)
 
+## Remarks
+Emphasize is on implementing the stuff mentioned under the goals, not on UX. 
+
 ## Sample:
 Sample the app at [jaapabrahams.com](http://jaapabrahams.com/udacity_neighborhood_project)
