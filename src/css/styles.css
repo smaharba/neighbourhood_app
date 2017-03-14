@@ -1,0 +1,436 @@
+/* RESET */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* END RESET */
+
+a {
+    text-decoration: none;
+}
+
+body{
+    font-family: verdana;
+    color: black;
+    max-width: 1200px;
+    margin: 0 auto 0 auto;
+    background-color: #9bbecc;
+}
+
+header {
+    background: url(../img/prenzlberg1200.jpg) no-repeat 100%;
+    height: 150px;
+    width: 1200px;
+    z-index: 0;
+    border-bottom: solid black 1px;
+    margin: 0;
+    padding: 0;
+    color: floralwhite;
+}
+
+.headerText,
+.headerSubText {
+    z-index: 1;
+}
+
+.headerText {
+    font-family: "Montserrat Subrayada", sans-serif;
+    font-size: 4.5em;
+    line-height: 1em;
+    margin: 0;
+}
+
+.headerSubText {
+    display: none;
+    color: black;
+    width: 200px;
+    padding: 3px;
+    position: fixed;
+    font-size: 1.6em;
+    background-color: rgba(255, 255, 255, 0.7);
+    top: 200px;
+    left: 40%;
+}
+
+#info {
+    font-family: serif;
+    font-size: 4em;
+    width:100%;
+    right: 20px;
+    text-align: right;
+}
+
+#fieldset,
+.fsqr-container {
+    max-width: 15%;
+    background-color: #ddd;
+    position: relative;
+    z-index: 1;
+}
+
+#fieldset {
+    float: left;
+    border-bottom-right-radius: 2%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ulAreas {
+    position: relative;
+}
+
+li {
+    text-decoration: none;
+    border: silver solid thin;
+}
+
+.liHeader,
+#fsqr-header,
+#searchField {
+    color: white;
+    background-color: #9bbecc;
+    padding: 5px 1%;
+}
+
+.liArea,
+li.article {
+    padding: 3px 0;
+}
+
+.liArea:nth-of-type(odd),
+li.article:nth-of-type(odd) {
+    background-color: rgba(157, 190, 203, 0.2);
+}
+
+.liArea:hover {
+    cursor: pointer;
+    background: white;
+}
+
+#inputSearch {
+    max-width: 90%;
+    font-size: 1em;
+}
+
+button {
+    font-size: 1em;
+    margin: 5px 1%;
+}
+
+.fsqr-container {
+    float: right;
+    border-bottom-left-radius: 2%;
+}
+
+.article a {
+    color: green;
+}
+
+li.article:hover {
+    background: white;
+}
+
+.article:nth-of-type(odd) {
+    background-color: rgba(157, 190, 203, 0.2);
+}
+
+.standOut,
+li.selected {
+    color: #ff0;
+}
+
+#map {
+    width: 1200px;
+    bottom: 0;
+    height: 100%;
+    position: absolute;
+    top: 150px;
+    z-index: -1;
+}
+
+#pano {
+    width: 200px;
+    height: 200px;
+}
+
+
+/*       responsive */
+@media screen and (max-width:320px) {
+    body {
+        min-width: 320px;
+        width: 100%;
+    }
+    
+    header {
+        background: url(../img/prenzlberg320.jpg) no-repeat;
+        height: 87px;
+        width: 320px;
+    }
+    
+    .headerText {
+        font-size: 2em;
+        top: -50px;
+    }
+    
+    .headerSubText {
+        font-size: 0.8em;
+        max-width: 100px;
+        left: 35%;
+        top: 150px;
+    }
+    
+    #info {
+        display: inline-block;
+        position: relative;
+        top: -30px;
+        left: 0;
+    }
+    
+    .fsqr-container {
+        max-width: 33%;
+        font-size: 3.5em;
+        display: none;
+    }
+    
+    .ulAreas,
+    .liHeader {
+        display: none;
+    }
+    
+    #map {
+        top: 87px;
+        width: 320px;
+    }
+    
+    #fieldset {
+        max-width: 30%;
+        font-size: 1em;
+    }
+    
+    #searchField {
+        font-size: 1em;
+        margin: 1px;
+        padding: 1px;
+        width: 130px;
+    }
+    
+    input {
+        width: 100px;
+    }
+       
+    #submitButton {
+        background-color: white;
+        margin: 2px;
+        width: 100px;
+        min-height: 30px;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 550px) {
+    body {
+        max-width: 550px;
+        width: 100%;
+        height: 700px;
+    }
+    
+    #map {
+        top: 100px;
+        max-width: 550px;
+        height: 100%;
+    }
+    
+    header {
+        background: url(../img/prenzlberg550.jpg) no-repeat;
+        height: 100px;
+        width: 550px;
+    }
+    
+    .headerText {
+        font-size: 3em;
+        top: -50px;
+    }
+    
+    .headerSubText {
+        font-size: 1.8em;
+        width: 40%;
+        top: 110px;
+        left: 30%;
+    }
+    
+    #info {
+        display: inline-block;
+        position: relative;
+        top: -50px;
+    }
+    
+    .fsqr-container {
+        max-width: 33%;
+        font-size: 3.5em;
+        display: none;
+    }
+    
+    .ulAreas,
+    .liHeader {
+        display: none;
+    }
+    
+    #searchField {
+        font-size: 1.3em;
+        margin: 1px;
+        padding: 1px;
+        width: 150px;
+    }
+    
+    #submitButton {
+        background-color: white;
+        margin: 2px;
+        width: 100px;
+        min-height: 30px;
+    }
+}
+
+@media screen and (min-width: 551px) and (max-width: 750px) {
+    body {
+        max-width: 750px;
+        width: 100%;
+    }
+    
+    #map {
+        top: 70px;
+        max-width: 80%;
+        left: 20%;
+        height: 100%;
+    }
+    
+    header {
+        background: url(../img/prenzlberg750x70.jpg) no-repeat;
+        height: 70px;
+        max-width: 750px;
+        width: 100%;
+    }
+    
+    .headerText {
+        font-size: 2.5em;
+    }
+    
+    .headerSubText {
+        font-size: 1.2em;
+        left: 30%;
+        top: 100px;
+    }
+    
+    #info {
+        display: inline-block;
+        position: relative;
+        top: -30px;
+    }
+    
+    #fieldset,
+    .fsqr-container {
+        max-width: 20%;
+        font-size: 0.8em;
+        overflow: hidden;
+    }
+}
+
+@media screen and (min-width: 751px) and (max-width: 1000px) {
+    body {
+        max-width: 1000px;
+        width: 100%;
+    }
+    
+    header {
+        background: url(../img/prenzlberg1000.jpg) no-repeat;
+        max-width: 1000px;
+        width: 100%;
+        height: 125px;
+    }
+    
+    .headerText {
+        font-size: 3.5em;
+    }
+    
+    .headerSubText {
+        font-size: 1.4em;
+    }
+    
+    #fieldset,
+    .fsqr-container {
+        max-width: 17%;
+        font-size: 0.8em;
+        overflow: hidden;
+    }
+    
+    #map {
+        top: 125px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+    body {
+        min-width: 1000px;
+        width: 100%;
+    }
+    
+    .fsqr-container {
+        position: fixed;
+        left: 1000px;
+        top: 150px;
+        min-width: 200px;
+    }
+}
