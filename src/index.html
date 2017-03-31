@@ -11,35 +11,45 @@
 </head>
 
 <body>
-    <div id="content">
-        <header>
-            <p class="headerText">Prenzlauer Berg</p>
-            <p class="headerSubText"> Pick a neighborhood in the list or on the map, type a search term and see in the right hand pop up window or on the map what the results are. <br>Powered by FOURSQUARE!</p>
-            <p id="info"><img src="img/info-icon.png" alt="info icon"></p>
-        </header>
+    <header>
+        <div class="headerText" >Prenzlauer Berg</div>
+    </header>
+    
+	<div id="map-error"></div>
 
-        <div id = "fieldset">
-            <form data-bind="submit: submit">
-                <p class="liHeader">Neighborhoods:</p>
-                <ul class="ulAreas"  data-bind = "foreach: poiList">
-                    <li class="liArea name" data-bind = "text: name, value: select, click: $parent.setPoi"></li>
-                </ul>
-                <div id="searchField">Search for: <input id="inputSearch"/></div>
-                <button id="submitButton" type="submit">Search!</button>
+    <div id="content" >
+        <div id="fieldset">
+            <form data-bind="submit: submit" class = "container">
+                <div id="selectArea" data-bind= "click: clearInfo">
+                    <span class="liHeader">Search:</span>
+                    <span id="searchField">
+                        <input data-bind="textInput: searchTerm">
+                    </span>
+                    <span>
+                        <select class="areaList" data-bind = "options: $root.myAreas, value: chosenArea, optionsText: 'areaName'"></select>
+                    </span>
+                </div>
+                <div id="submitButton">
+                    <button type="submit">Search!</button>
+                </div>
             </form>
         </div>
 
-        <div class="fsqr-container">
-            <p id="fsqr-header"></p>
-            <ul id="fsqr-articles" class="article-list"></ul>
+        <div class="fsqr-container" data-bind="visible: showRightHandList">
+            <p id="fsqr-header"></span>These are the results for <span class="standOut" data-bind="text: searchTerm()"></span> in the <span class="standOut"  data-bind="text: chosenArea().areaName"></span> area: <span class="fsqrFailText" data-bind = "text: fsqrFailText"></p>
+            <p id="fsqr-articles"></p>
+            <div data-bind = "visible: showResults">
+                <ul data-bind = "foreach: myPois">
+                    <li class = "poiList" data-bind = "text: poiName"></li>
+                </ul>
+            </div>
+            <p class="foursquareLink">Powered by <a href="https://foursquare.com/" title="This link will open in a new tab" target="_blank">Foursquare</a></p>
         </div>
+    </div><!-- content -->
+    <div id="map"></div>
 
-        <div id="map"></div>
-
-    </div>
 <script src="js/app.js"></script>
-<script async defer
-   src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyAKnJEQh_lM8MqdoGhUdUzjQZwui6qI_l8&libraries=places,geometry,drawing&v=3">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKnJEQh_lM8MqdoGhUdUzjQZwui6qI_l8&libraries=places,geometry,drawing&v=3&callback=getAreas" onerror="googleError()">
 </script>
 </body>
 </html>
