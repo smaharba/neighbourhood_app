@@ -1,22 +1,13 @@
 /* RESET */
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+html, body, div, span, h1, h2, h3, h4, h5, h6, p,
+a, em, img, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+table, tbody, tfoot, thead, tr, th, td,
+article, aside, footer, header, hgroup,
+menu, nav, output, section {
     margin: 0;
     padding: 0;
     border: 0;
@@ -40,29 +31,12 @@ ol, ul {
     list-style: none;
 }
 
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-/* END RESET */
-
 /* general */
 body{
     font-family: verdana;
-    font-size: 0.8em;
-    color: black;
-    max-width: 750px;
-    margin: 0 auto 0 auto;
+    color: darkslategray;
+    max-width: 850px;
+    margin: 0 auto;
     background-color: #9bbecc;
 }
 
@@ -71,146 +45,119 @@ a {
     color: green;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 li {
     text-decoration: none;
-    border: silver solid thin;
 }
 
-#content {
+.content {
     position: relative;
+    max-width: 15%;
+    z-index: 1;
 }
 
-.container {
-  display: flex;
-  width: 100%;
+.googleError {
+    color: red;
+    font-size: 2em;
+}
+
+.standOut {
+    font-weight: bold;
+    font-style: italic;
 }
 
 /* header */
 header {
-    background: url(../img/prenzlberg750x70.jpg) no-repeat;
+    background: url(../img/prenzlberg850x70.jpeg) no-repeat;
     height: 70px;
-    width: 750px;
-    z-index: 0;
+    width: 850px;
     border-bottom: solid black 1px;
-    margin: 0;
-    padding: 0;
-    color: floralwhite;
-}
-
-form {
-    width: 100%;
-}
-
-.headerText,
-.headerSubText {
-    z-index: 1;
+    color: ivory;
 }
 
 .headerText {
     font-family: "Montserrat Subrayada", sans-serif;
     font-size: 3.5em;
     line-height: 1em;
-    margin: 0;
 }
 
-/* form */
-#fieldset {
-    background-color: rgba(157, 190, 203, 0.8);
-}
-
-#selectArea {
-    width: 70%;
-    flex-wrap: wrap;
-    margin-top: 5px;
-}
-
-.liHeader {
-    width: 20%;
-    color: white;
-}
-
-#searchField {
-    width: 20%;
+/* app */
+.searchField {
     padding: 5px 1%;
 }
 
-input{
-    font-size: 0.8em;
+input,
+select {
+    font-size: 16px;
+    width: 160px;
 }
 
-.areaList {
-    font-size: 0.8em;
-    width: 30%;
-}
-
-#submitButton {
-    width: 20%;
-    float: right;
-    margin: 5px;
-}
-
-button {
-    font-size: 0.8em;
-}
-
-#reset {
-    display: none;
-    margin: 10px 0% 0 auto;   
-    width: 5%;
-}
-
-.fsqr-container {
-    display: block;
-    width: 100px;
+.listContainer {
+    width: 130px;
     background-color: rgba(157, 190, 203, 0.8);
-    position: absolute;
-    left:650px;
-    z-index: 1;
-    border: #c1d9ff thin solid;
-    font-size: 0.9em;
+    background-color: rgba(240, 255, 240, 0.6);
+    border: #c1d9ff solid 1px;
+    border-bottom: none;
+    font-size: 16px;
+}
+
+.listItem {
+    padding: 3px 2px;
+    border-top: #c1d9ff solid 1px;
+}
+
+.listItem:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.listItem:hover {
+    cursor: pointer;
+    background: white;
+}
+
+.fsqrHeader {
+    color: black;
+    padding: 5px 1%;
+    background-color: white;
+    font-size: 14px;
+    border-top: ridge 7px rgba(240, 255, 240, 0.6);
+    }
+
+.fsqrLink {
+    padding-top: 8px;
+    background-color: white;
+    border-top: thin solid black;
+    font-size: 0.6em;
+    min-height: 60px;
+}
+
+.fsqrLogo {
+    position: relative;
+    top: 5px;
 }
 
 .fsqrFailText {
     color: red;
 }
 
-#fsqr-header,
-#searchField {
-    color: white;
-    padding: 5px 1%;
-}
-
-.foursquareLink {
-    padding-top: 10px;
-    background-color: rgb(157, 190, 203);
-}
-
-li.poiList:hover {
-    background-color: white;
-    cursor: pointer;
-}
-
-li.poiList {
-    background-color: rgb(157, 190, 203);
-    padding: 5px 0;
-}
-
-.standOut {
-    color: #72297c;
+.fsqrNoResult {
+    color: black;
 }
 
 #map {
-    width: 750px;
-    bottom: 0;
+    width: 850px;
     height: 100%;
+    min-height: 500px;
     position: absolute;
     top: 70px;
-    z-index: -1;
+}
+
+.infoWindow {
+    margin: 0;
+    padding: 0;
+}
+
+.infoWindowHeading {
+    color: green;
 }
 
 /*       responsive */
@@ -227,51 +174,25 @@ li.poiList {
     }
 
     .headerText {
-        font-size: 2em;
+        font-size: 1.5em;
     }
 
-    #selectArea {
-        width: 70%;
-        margin-top: 10px;
+    input,
+    select {
+    font-size: 16px;
     }
 
-    .liHeader {
-        width: 10%;
+    .listContainer {
+        width: 100px;
+        font-size: 0.9em;
     }
 
-    #searchField {
-        width: 20%;
-        font-size: 0.7em;
-        max-width: 50px;
-    }
-
-    input {
-        width: 35px;
-    }
-
-    .areaList {
-        width: 50%;
-    }   
-
-    #submitButton {
-        margin-top: 10px;
-        max-width: 10%;
-    }
-
-    #reset {
-        display: none;
-        font-size: 0.7em;
-        margin-top: 13px;
-        max-width: 10%;
-    }
-
-    fsqr-container {
-        left:220px;
-        font-size: 0.5em;
+    .listItem {
+        padding: 4px 1px;
     }
 
     #map {
-        top: 70px;
+        top: 30px;
         width: 320px;
         height: 600px;
     }
@@ -293,40 +214,29 @@ li.poiList {
         font-size: 3em;
     }
 
-    #selectArea {
-        width: 70%;
-        margin-top: 10px;
+    input,
+    select {
+        font-size: 16px;
     }
 
-    .liHeader {
-        width: 20%
+    .listContainer {
+        font-size: 1em;
     }
 
-    #searchField {
-        font-size: 0.7em;
-        width: 20%;
-    }
-
-    .areaList {
-    width: 40%;
-    }
-         
-    #submitButton {
-        margin: 5px 0 0 auto;
-        max-width: 10%;
-    }    
-
-    input {
-        width: 50px;
-    }
-
-    .fsqr-container {
-        left: 450px;
-        font-size: 0.5em;
+    .listItem {
+        padding: 4px 1px;
     }
 
     #map {
         top: 40px;
         max-width: 550px;
+    }
+}
+
+/* to prevent zoom on focus input element (everything less than 24px triggers zoom) */
+@media screen and (min-width: 551px) and (max-width: 650px) {
+    input,
+    select {
+        font-size: 24px;
     }
 }
