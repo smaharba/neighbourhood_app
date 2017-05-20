@@ -26,14 +26,14 @@ function getAreas() {
                     img: dataResp.img
                 });
             });
-            goDoStuff(myJson);
+            runApplication(myJson);
         }).fail(function(e){
     alert('Something went wrong! Unable to load data to show the areas list.');
     });
     return false;
 }
 
-function goDoStuff(myJson){
+function runApplication(myJson){
     //Note: fsqr = Foursquare
     "use strict";
     var map,
@@ -191,14 +191,13 @@ function goDoStuff(myJson){
             searchFor = self.searchTerm();
             // !!empty the fsqrData array, otherwise obsolete markers will pop up
             fsqrData.length = 0;
-
             var centerOnItem = {lat: chosen.loc.lat, lng: chosen.loc.lng};
             map.panTo(centerOnItem);
 
             // check if a search term was entered and show/hide itemList
             if(searchFor === '' || searchFor === undefined) {
                 self.showItemList(false);
-                self.removeMarkers();
+//                 self.removeMarkers();
                 return false;
             }
             else {
@@ -207,14 +206,14 @@ function goDoStuff(myJson){
                     self.showHideAreaList(false);
                 }
             }
-
             var latLng = chosen.loc.lat + ',' + chosen.loc.lng;
 
         // store the search data in the url:
-        var fsqrUrl = 'https://api.foursquare.com/v2/venues/search?client_id=XV45PHON55RFFRM3GNN1BODO2NWH45LCGBKPVQWLOKGUI4XA&client_secret=YVKQJGWU1G2TH1BGQXHULAGHOYDL443Z3HPQ0JBFCJWM4QPD&v=20130815&ll=' + latLng + '&query=' + searchFor + '&intent=checkin&limit=5&radius=1000';
+        var fsqrUrl = 'https://api.foursquare.com/v2/venues/search?client_id=XV45PHON55RFFRM3GNN1BODO2NWH45LCGBKPVQWLOKGUI4XA&client_secret=YVKQJGWU1G2TH1BGQXHULAGHOYDL443Z3HPQ0JBFCJWM4QPD&v=20130815&ll=' + latLng + '&query=' + searchFor + '&intent=checkin&limit=5&radius=1000';       
             //foursquare jquery json request:
             $.getJSON(fsqrUrl, function(data){
                 var dataResp = data.response.venues;
+//console.log('fsqr fired!');
                 $.each(dataResp, function (i, dataResp) {
                     //put the foursquare response in the fsqrData array
                     // but check if dataResp.categories is present
@@ -248,7 +247,6 @@ function goDoStuff(myJson){
                         });
                     }
                 });
-
                 // some returned values are 'undefined', replace them with ' '
                 $.each(fsqrData, function (index, value) {
                     if(value.url === undefined) {
@@ -266,7 +264,7 @@ function goDoStuff(myJson){
                 });
 
                 // check if there are any results, if not, notify
-                var supercalifragilisticexpialidocious = function(fsqrData){
+                var checkResult = function(fsqrData){
                     if(fsqrData.length === 0){
                         self.fsqrNoResult('Sorry, no results found!');
                         self.showResults(false);
@@ -277,7 +275,7 @@ function goDoStuff(myJson){
                         }
                 };
                 self.setPois(fsqrData);
-                supercalifragilisticexpialidocious(fsqrData);
+                checkResult(fsqrData);
 
                 //FOURSQUARE on the map:
                 //fill in all the data from the foursquare query:
@@ -342,7 +340,6 @@ function goDoStuff(myJson){
                 }
                 addFsqrMarkers();
                 self.setMapOnAll(map);
-
             })
             .fail(function(e){
                 self.fsqrFailText('Sorry. Something has gone wrong. The Foursquare server could not be reached');
