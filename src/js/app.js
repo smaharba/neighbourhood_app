@@ -1,5 +1,4 @@
 var myJson = [];
-
 //googleError() only gets triggered if the FQDN is incorrect or if something else goes wrong. But if it's only the key which is incorrect then this function will not be triggered and the default google maps error notification will be shown 
 function googleError() {
     ko.applyBindings(new ErrorViewModel());
@@ -12,7 +11,7 @@ function ErrorViewModel() {
 
 //pull THE MODEL data from the server
 function getAreas() {
-    $.getJSON("https://api.myjson.com/bins/11np4h")
+    $.getJSON("https://api.myjson.com/bins/a90g1")
         .done(function(data){
             var dataResp = data;
             $.each(dataResp, function (i, dataResp) {
@@ -134,6 +133,10 @@ function runApplication(myJson){
         this.fsqrFailText = ko.observable();
         this.fsqrNoResult = ko.observable('');
         this.showHideAreaList = ko.observable(true);
+        this.showForm = ko.observable(true);
+        this.infoText1 = ko.observable('First...');
+        this.infoText2 = ko.observable('Then...');
+        this.showAgainBtn = ko.observable(false);
         var self = this;
 
         // walk through the model and fill the 'myAreas' array with all items in it
@@ -181,8 +184,11 @@ function runApplication(myJson){
         };
 
         this.itemListClick = function(value) {
-            bounceMarker(value.myMarker);
-
+            self.showAgainBtn(true);
+            self.showForm(false);
+            self.infoText1('New search term?');
+            self.infoText2('New area?');
+            google.maps.event.trigger(value.myMarker, "click");
             //set the chosen area
             self.currentArea(self.myAreas()[value.areaId]);
             self.chosenArea(self.currentArea().areaName);
@@ -194,10 +200,9 @@ function runApplication(myJson){
             var centerOnItem = {lat: chosen.loc.lat, lng: chosen.loc.lng};
             map.panTo(centerOnItem);
 
-            // check if a search term was entered and show/hide itemList
+            // check if a search term was entered and show/hide itemList and form
             if(searchFor === '' || searchFor === undefined) {
                 self.showItemList(false);
-//                 self.removeMarkers();
                 return false;
             }
             else {
@@ -208,12 +213,11 @@ function runApplication(myJson){
             }
             var latLng = chosen.loc.lat + ',' + chosen.loc.lng;
 
-        // store the search data in the url:
+        //store the search data in the url:
         var fsqrUrl = 'https://api.foursquare.com/v2/venues/search?client_id=XV45PHON55RFFRM3GNN1BODO2NWH45LCGBKPVQWLOKGUI4XA&client_secret=YVKQJGWU1G2TH1BGQXHULAGHOYDL443Z3HPQ0JBFCJWM4QPD&v=20130815&ll=' + latLng + '&query=' + searchFor + '&intent=checkin&limit=5&radius=1000';       
             //foursquare jquery json request:
             $.getJSON(fsqrUrl, function(data){
                 var dataResp = data.response.venues;
-//console.log('fsqr fired!');
                 $.each(dataResp, function (i, dataResp) {
                     //put the foursquare response in the fsqrData array
                     // but check if dataResp.categories is present
@@ -247,22 +251,7 @@ function runApplication(myJson){
                         });
                     }
                 });
-                // some returned values are 'undefined', replace them with ' '
-                $.each(fsqrData, function (index, value) {
-                    if(value.url === undefined) {
-                        value.url = ' ';
-                    }
-                    if(value.phone === undefined) {
-                        value.phone = ' ';
-                    }
-                    // formattedAddress is an array of three:
-                    for(var i = 0; i < 3; i++){
-                        if(value.address[i] === undefined){
-                            value.address[i] = ' ';
-                        }
-                    }
-                });
-
+                
                 // check if there are any results, if not, notify
                 var checkResult = function(fsqrData){
                     if(fsqrData.length === 0){
@@ -276,6 +265,22 @@ function runApplication(myJson){
                 };
                 self.setPois(fsqrData);
                 checkResult(fsqrData);
+
+                // some returned values are 'undefined', replace them with ''
+                $.each(fsqrData, function (index, value) {
+                    if(value.url === undefined) {
+                        value.url = '';
+                    }
+                    if(value.phone === undefined) {
+                        value.phone = '';
+                    }
+                    // formattedAddress is an array of three:
+                    for(var i = 0; i < 3; i++){
+                        if(value.address[i] === undefined){
+                            value.address[i] = '';
+                        }
+                    }
+                });
 
                 //FOURSQUARE on the map:
                 //fill in all the data from the foursquare query:
@@ -349,10 +354,12 @@ function runApplication(myJson){
 
         //set content for the area infoWindow
         function getContent(area){
+            var showImg = '';
+            if(vwHeight() >= 500){ var showImg = '<img src = "' + area.areaImg + '">'; }
             var contentString = '<div class="infoWindow"><p class="infoWindowHeading">' + area.areaName;
             contentString += '</p><p><br>' + area.areaInfo;
-            contentString += '<img src = "' + area.areaImg;
-            contentString += '"></p></div>';
+            contentString += showImg;
+            contentString += '</p></div>';
             return contentString;
         }
 
@@ -430,5 +437,4 @@ function runApplication(myJson){
         }, this);
     }//end appViewModel
     ko.applyBindings(new AppViewModel());
-
 }//end doStuff()
