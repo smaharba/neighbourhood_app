@@ -51,7 +51,7 @@ li {
 
 .content {
     position: relative;
-    max-width: 15%;
+    max-width: 166px;
     z-index: 1;
 }
 
@@ -81,14 +81,16 @@ header {
 }
 
 /* app */
-.searchField {
-    padding: 5px 1%;
+.info {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 input,
 select {
     font-size: 16px;
     width: 160px;
+    margin-bottom: 3px;
 }
 
 .listContainer {
@@ -152,7 +154,7 @@ select {
 }
 
 .infoWindow {
-    margin: 0;
+    margin-left: 10px;
     padding: 0;
 }
 
@@ -233,10 +235,26 @@ select {
     }
 }
 
-/* to prevent zoom on focus input element (everything less than 24px triggers zoom) */
+/* to prevent zoom on focus input element (anything less than 24px triggers zoom) */
 @media screen and (min-width: 551px) and (max-width: 650px) {
     input,
     select {
         font-size: 24px;
+    }
+}
+
+/* smaller screen sizes in landscape */
+@media screen and (max-height: 350px) {
+    button, .listContainer, .fsqrLink, .fsqrHeader {
+        font-size: 22px;
+    }
+
+    .listContainer {
+        width: 160px;
+        line-height: 25px;
+    }
+
+    .infoWindow {
+        font-size: 18px;
     }
 }
