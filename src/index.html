@@ -19,26 +19,38 @@
 
     <main class="content">
 
-        <div class="searchField" data-bind="click: $root.removeMarkers">
-            <span>
-                <input type="text" data-bind="textInput: searchTerm, click: hideFsqr()" autocomplete="on" placeholder="Fill in search term">
-            </span>
+        <div class="againButton">
+            <button data-bind="visible: showAgainBtn, click: showForm">Search</button>
         </div>
 
-        <div class="searchField" data-bind="click: showAreaList">
-            <p>
-                <input type="text" data-bind="textInput: filter, valueUpdate:'afterkeydown'" autocomplete="off" placeholder="Search the area list">
-            </p>
-        </div>
+        <form data-bind="visible: showForm">
+            <div class="info" data-bind="text: infoText1"></div>
 
-        <div class="listContainer" data-bind="visible: showHideAreaList()">
-            <ul data-bind="foreach: areaList, visible: areaList().length > 0">
-                <li class = "listItem" data-bind= "text: areaName, click: $root.itemListClick"></li>
-            </ul>
-        </div>
+            <div class="searchField" data-bind="click: $root.removeMarkers">
+                <span>
+                    <input type="text" data-bind="textInput: searchTerm, click: hideFsqr()" autocomplete="on" placeholder="fill in search term">
+                </span>
+            </div>
+
+            <div class="info" data-bind="text: infoText2"></div>
+
+            <div class="searchField" data-bind="click: showAreaList">
+                <p>
+                    <input type="text" data-bind="textInput: filter, valueUpdate:'afterkeydown'" autocomplete="off" placeholder="filter areas">
+                </p>
+            </div>
+
+            <div class="info">And choose:</div>
+
+            <div class="listContainer" data-bind="visible: showHideAreaList()">
+                <ul data-bind="foreach: areaList, visible: areaList().length > 0">
+                    <li class = "listItem" data-bind= "text: areaName, click: $root.itemListClick"></li>
+                </ul>
+            </div>
+        </form>
 
         <div class="listContainer" data-bind="visible: showItemList">
-            <p class ="fsqrHeader">These are the results for 
+            <p class ="fsqrHeader">These are the results for.
 <span class="standOut" data-bind="text: searchTerm()"></span> in the <span class="standOut"  data-bind="text: chosenArea()"></span> area: <span class="fsqrNoResult" data-bind="text: fsqrNoResult"></span><span class="fsqrFailText" data-bind="text: fsqrFailText"></span></p>
             <div data-bind="visible: showResults">
                 <ul data-bind="foreach: myPois">
