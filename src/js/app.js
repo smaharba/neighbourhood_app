@@ -1,10 +1,10 @@
 var myJson = [];
 //googleError() only gets triggered if the FQDN is incorrect or if something else goes wrong. But if it's only the key which is incorrect then this function will not be triggered and the default google maps error notification will be shown 
 function googleError() {
-    ko.applyBindings(new ErrorViewModel());
+    ko.applyBindings(new errorViewModel());
 }
 
-function ErrorViewModel() {
+function errorViewModel() {
     this.googleErr = ko.observable('Sorry. Google Maps failed to load. Please try again later.');
     return false;
 }
@@ -26,9 +26,10 @@ function getAreas() {
                 });
             });
             runApplication(myJson);
-        }).fail(function(e){
-    alert('Something went wrong! Unable to load data to show the areas list.');
-    });
+        })
+        .fail(function(e){
+            alert('Something went wrong! Unable to load data to show the areas list.');
+        });
     return false;
 }
 
@@ -415,25 +416,26 @@ function runApplication(myJson){
         });
 
         // filter for the areaList
-        self.filter = ko.observable("");
+        self.filter = ko.observable('');
 
-        this.areaList = ko.dependentObservable(function() {
-          var q = this.filter().toLowerCase();
-          if (!q) {
-          return ko.utils.arrayFilter(self.myAreas(), function(item) {
-            item.myMarker.setVisible(true);
-            return true;
-          });
-          } else {
-            return ko.utils.arrayFilter(this.myAreas(), function(item) {
-              if (item.areaName.toLowerCase().indexOf(q) >= 0) {
-              return true;
-              } else {
-                item.myMarker.setVisible(false);
-              return false;
-              }
-            });
-          }
+        this.areaList = ko.computed(function() {
+			var q = this.filter().toLowerCase();
+			if (!q) {
+				return ko.utils.arrayFilter(self.myAreas(), function(item) {
+					item.myMarker.setVisible(true);
+					return true;
+          		});
+            } else {
+	            return ko.utils.arrayFilter(this.myAreas(), function(item) {
+	                if (item.areaName.toLowerCase().indexOf(q) >= 0) {
+					item.myMarker.setVisible(true);
+	                    return true;
+	                } else {
+						item.myMarker.setVisible(false);
+						return false;
+	                }
+	            });
+            }
         }, this);
     }//end appViewModel
     ko.applyBindings(new AppViewModel());
