@@ -1,3 +1,4 @@
+//es6
 const myJson = [];
 //googleError() only gets triggered if the FQDN is incorrect or if something else goes wrong. 
 //But if it's only the key which is incorrect then this function will not be triggered 
